@@ -1,15 +1,38 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
-const FormularioTareas = () => {
+const FormularioTareas = ({tareas, setTareas}) => {
+
+    const [ inputTarea, setInputTarea ] = useState('');
+
+    const handleInput = (e) => {
+        setInputTarea(e.target.value);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        setTareas(
+            [
+                ...tareas, 
+                {
+                    id: uuidv4(),
+                    texto: inputTarea,
+                    completada: false
+                }
+            ]);
+    }
+
     return ( 
-        <form action="" className="formulario-tareas">
+        <form action="" className="formulario-tareas" onSubmit={handleSubmit}>
             <input 
                 placeholder="Escribe una tarea" 
                 type="text" 
                 className="formulario-tareas__input" 
-
+                value={inputTarea}
+                onChange={(e) => handleInput(e)}
                 />
             <button 
                 type="submit"
