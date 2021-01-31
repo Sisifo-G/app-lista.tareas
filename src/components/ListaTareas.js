@@ -15,6 +15,27 @@ const ListaTareas = ({tareas, setTareas}) => {
         }));
     }
 
+    const editarTarea = (id, nuevoTexto) => {
+        setTareas(tareas.map( (tarea) => {
+            if(tarea.id === id){
+                return {
+                    ...tarea,
+                    texto: nuevoTexto
+                }
+            }
+            return tarea;
+        }));
+    }
+
+    const borrarTarea = (id) => {
+        setTareas(tareas.filter( (tarea) => {
+            if(tarea.id !== id){
+                return tarea;
+            }
+            return;
+        }));
+    }
+
 
     return ( 
 
@@ -24,6 +45,8 @@ const ListaTareas = ({tareas, setTareas}) => {
                             key={tarea.id} 
                             tarea={tarea} 
                             toggleCompletada={toggleCompletada}
+                            editarTarea={editarTarea}
+                            borrarTarea={borrarTarea}
                         />
             })
             : <div className="lista-tareas__mensaje">~ No hay tareas agregadas todavía ~</div>
