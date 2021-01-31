@@ -19,13 +19,22 @@ const App = () => {
       }
     ]
   );
+
+  const [ mostrarCompletadas, setMostrarCompletadas ] = useState(true);
   
   return (
     <div className="contenedor">
-     <Header />
-     <FormularioTareas tareas={tareas} setTareas={setTareas} />
-     <ListaTareas tareas={tareas} setTareas={setTareas}/>
-    </div>
+      <Header 
+          mostrarCompletadas={mostrarCompletadas}
+          setMostrarCompletadas={setMostrarCompletadas}
+      />
+      <FormularioTareas tareas={tareas} setTareas={setTareas} />
+      <ListaTareas 
+          tareas={tareas} 
+          setTareas={setTareas}
+          mostrarCompletadas={mostrarCompletadas}
+        />
+      </div>
   );
 }
 
